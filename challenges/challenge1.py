@@ -10,8 +10,12 @@
 '''
 
 
-def get_leet_by_character(character: str) -> str:
+def main(text):
     '''PH'''
+
+    if text is None:
+        return None
+
     leet = {
         'A': '4',
         'B': 'I3',
@@ -41,18 +45,4 @@ def get_leet_by_character(character: str) -> str:
         'Z': '2'
     }
 
-    if character in leet:
-        return leet[character]
-    return character
-
-
-def main(text):
-    '''PH'''
-    if text is None:
-        return None
-
-    upper_text = text.upper()
-
-    transformed = [get_leet_by_character(char) for char in upper_text]
-    new_text = "".join(transformed)
-    return new_text
+    return "".join([leet.get(char, char) for char in text.upper()])
