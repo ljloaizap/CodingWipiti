@@ -39,5 +39,5 @@ def test_main_prints_fizz_for_multiple_of_3_and_5(capsys):
     stdout, _ = capsys.readouterr()
     arr_numbers = stdout.strip().split("\n")
     for i, value in enumerate(arr_numbers):
-        if (i+1) % 3 == 0 and (i+1) % 5 == 0:
+        if (i+1) % 15 == 0:
             assert value == 'fizzbuzz'
