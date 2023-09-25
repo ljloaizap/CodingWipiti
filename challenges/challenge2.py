@@ -31,13 +31,18 @@ def main(sequence: str) -> str:
         print('[Error] La secuencia no puede ser nula ni vacía')
         return 'E-NENV'  # No entry or not valid
 
-    movements = sequence.split(",")
-    # if len(movements) == 0:
-    #    print('[Error] La secuencia no es válida. Use valores P1/P2 separados por coma')
-    #    return 101  # No entry or not valid
+    scoring = {
+        '0': 'Love',
+        '1': '15',
+        '2': '30',
+        '3': '40',
+    }
 
     scoring_p1 = 0
     scoring_p2 = 0
+    movements = sequence.split(",")
+    print(f'> Secuencia: {sequence}')
+
     for movement in movements:
         if movement.strip() == 'P1':
             scoring_p1 += 1
@@ -48,44 +53,27 @@ def main(sequence: str) -> str:
                 f'[Error] La entrada "{movement}" no es un valor esperado. Debe ser "P1" o "P2"')
             return 'E-NM'  # Non-matching value
 
-        # print_scoring(scoring_p1, scoring_p2)
-        print(f'> {get_scoring(scoring_p1, scoring_p2)}')
+        if scoring_p1 == scoring_p2:
+            print('Deuce')
+        elif scoring_p1 < 4 and scoring_p2 < 4:
+            print(f'{scoring.get(str(scoring_p1))} - {scoring.get(str(scoring_p2))}')
+        else:
+            diff = scoring_p1 - scoring_p2
+            if diff == 1:
+                print('Ventaja P1')
+            elif diff == -1:
+                print('Ventaja P2')
+            elif diff > 1:
+                print('Ha ganado el P1')
+                break
+            elif diff < -1:
+                print('Ha ganado el P2')
+                break
+            else:
+                print('El programa no sabe / no responde')
 
     return 'I-OK'
 
 
-def get_scoring(scoring_p1, scoring_p2):
-    '''PH'''
-
-    if scoring_p1 == scoring_p2:
-        return "Deuce"
-
-    return 'rabbit'
-
-
-'''
-def print_scoring(scoring_p1, scoring_p2):
-    scoring = {
-        '0': 'Love',
-        '1': '15',
-        '2': '30',
-        '3': '40',
-    }
-
-    if scoring_p1 == scoring_p2:
-        print("Deuce")
-    elif abs(scoring_p1 - scoring_p2) > 1:
-        if scoring_p1 > scoring_p2:
-            print("Ha ganada el P1")
-        else:
-            print("Ha ganada el P2")
-    elif abs(scoring_p1 - scoring_p2) > 0:
-        if scoring_p1 > scoring_p2:
-            print("Ventaja P1")
-        else:
-            print("Ventaja P2")
-    else:
-        text_p1 = scoring.get(str(scoring_p1), str(scoring_p1))
-        text_p2 = scoring.get(str(scoring_p2), str(scoring_p2))
-        print(f'{text_p1} - {text_p2}')
-'''
+# print(main('P1, P1, P1, P1, P1, P1, P1, P1'))
+print(main('P1, P1, P1, P2, P2, P2, P1, P1'))

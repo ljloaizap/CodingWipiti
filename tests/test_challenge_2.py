@@ -25,17 +25,35 @@ def test_main_return_code(sequence, expected):
 ])
 def test_main_deuce(capsys, sequence, expected):
     '''PH'''
-    # main('P1, P2')
     main(sequence)
     stdout, _ = capsys.readouterr()
     last_line = stdout.split('\n')[-2]
-    # assert last_line == "> Deuce"
-    assert last_line == f"> {expected}"
+    assert last_line == expected
 
 
-def test_main_rabbit(capsys):
+@pytest.mark.parametrize('sequence, expected', [
+    ('P1', '15 - Love'),
+    ('P1, P1, P1, P2', '40 - 15'),
+    ('P1, P2, P1, P2, P2', '30 - 40')
+])
+def test_main_initial_values(capsys, sequence, expected):
     '''PH'''
-    main('P1')
+    main(sequence)
     stdout, _ = capsys.readouterr()
-    # last_line = stdout.split('\n')[-1]
-    assert stdout == "> rabbit\n"
+    last_line = stdout.split('\n')[-2]
+    assert last_line == expected
+
+
+@pytest.mark.parametrize('sequence, expected', [
+    ('P1, P1, P1, P2, P2, P2, P1', 'Ventaja P1'),
+    ('P1, P1, P1, P2, P2, P2, P2', 'Ventaja P2'),
+    ('P1, P1, P1, P2, P2, P2, P1, P1', 'Ha ganado el P1'),
+    ('P1, P1, P1, P2, P2, P2, P2, P2', 'Ha ganado el P2')
+])
+def test_main_ending_values(capsys, sequence, expected):
+    '''PH'''
+    main(sequence)
+
+    stdout, _ = capsys.readouterr()
+    last_line = stdout.split('\n')[-2]
+    assert last_line == expected
