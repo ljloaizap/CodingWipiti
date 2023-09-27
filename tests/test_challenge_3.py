@@ -46,11 +46,6 @@ def test_main_has_symbols(with_symbols):
 ])
 def test_main_have_all_combined(has_mayus, has_numbers, has_symbols):
     '''PH'''
-    # has_mayus = True
-    # has_numbers = True
-    # has_symbols = True
 
     pwd = main(16, has_mayus, has_numbers, has_symbols)
     assert bool(re.search('', pwd))
-    print(
-        f'> Mayus: <{has_mayus}>; Numbers: <{has_numbers}>; Symbols: <{has_symbols}> --- Pwd: <{pwd}>')
