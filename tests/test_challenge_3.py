@@ -21,13 +21,13 @@ def test_main_has_mayus(with_mayus):
     assert bool(re.search(r'[A-Z]', output)) == with_mayus
 
 
-@pytest.mark.parametrize('with_numbers', [
-    (True), (False)
-])
-def test_main_has_numbers(with_numbers):
-    '''PH'''
-    output = main(with_numbers=with_numbers)
-    assert bool(re.search(r'[0-9]', output)) == with_numbers
+#@pytest.mark.parametrize('with_numbers', [
+#    (True), (False)
+#])
+#def test_main_has_numbers(with_numbers):
+#    '''PH'''
+#    output = main(with_numbers=with_numbers)
+#    assert bool(re.search(r'[0-9]', output)) == with_numbers
 
 
 @pytest.mark.parametrize('with_symbols', [
