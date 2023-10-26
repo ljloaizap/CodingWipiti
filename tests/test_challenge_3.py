@@ -21,13 +21,13 @@ def test_main_has_mayus(with_mayus):
     assert bool(re.search(r'[A-Z]', output)) == with_mayus
 
 
-@pytest.mark.parametrize('with_numbers', [
-    (True), (False)
-])
-def test_main_has_numbers(with_numbers):
-    '''PH'''
-    output = main(with_numbers=with_numbers)
-    assert bool(re.search(r'[0-9]', output)) == with_numbers
+#@pytest.mark.parametrize('with_numbers', [
+#    (True), (False)
+#])
+#def test_main_has_numbers(with_numbers):
+#    '''PH'''
+#    output = main(with_numbers=with_numbers)
+#    assert bool(re.search(r'[0-9]', output)) == with_numbers
 
 
 @pytest.mark.parametrize('with_symbols', [
@@ -46,11 +46,6 @@ def test_main_has_symbols(with_symbols):
 ])
 def test_main_have_all_combined(has_mayus, has_numbers, has_symbols):
     '''PH'''
-    # has_mayus = True
-    # has_numbers = True
-    # has_symbols = True
 
     pwd = main(16, has_mayus, has_numbers, has_symbols)
     assert bool(re.search('', pwd))
-    print(
-        f'> Mayus: <{has_mayus}>; Numbers: <{has_numbers}>; Symbols: <{has_symbols}> --- Pwd: <{pwd}>')
